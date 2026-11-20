@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="fil"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Testing Lang Gud → Pamana → SIBOL</title>
+<link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#2b1d14">
+<style>
+:root{--bg:#faf6ee;--tx:#2b1d14;--mu:#6b5a4b;--cd:#fff;--bd:#e2d8c6;--tlg:#e7a928;--pam:#4f8a5b;--sib:#a0693a}
+@media(prefers-color-scheme:dark){:root:not([data-t=l]){--bg:#1c1410;--tx:#f1e8da;--mu:#b9a995;--cd:#2a1f18;--bd:#43352a}}
+:root[data-t=d]{--bg:#1c1410;--tx:#f1e8da;--mu:#b9a995;--cd:#2a1f18;--bd:#43352a}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:17px/1.55 Georgia,serif;padding-bottom:72px}
+header{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--bd);padding:10px 14px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+h1{font-size:1rem;margin:0;flex:1;min-width:140px}
+.lg button,.th{border:1px solid var(--bd);background:var(--cd);color:var(--tx);padding:6px 10px;border-radius:8px;font:inherit;font-size:.85rem;cursor:pointer}
+.lg button.on{background:var(--tx);color:var(--bg)}
+main{max-width:760px;margin:0 auto;padding:14px}
+.card{background:var(--cd);border:1px solid var(--bd);border-left:6px solid var(--c,var(--bd));border-radius:12px;padding:14px;margin:12px 0}
+.card h3{margin:0 0 4px}.mu{color:var(--mu);font-size:.9rem}
+.arrow{text-align:center;color:var(--mu);font-size:.9rem}
+.tag{display:inline-block;font-size:.75rem;padding:2px 8px;border-radius:99px;color:#fff;margin-right:4px}
+.t-tlg{background:var(--tlg);color:#2b1d14}.t-pam{background:var(--pam)}.t-sib{background:var(--sib)}
+.q{font-style:italic;border-left:3px solid var(--bd);padding-left:10px;margin:8px 0}
+details{margin-top:8px}summary{cursor:pointer;color:var(--mu)}
+.wheel{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.wheel button{border:2px solid var(--bd);background:var(--cd);color:var(--tx);border-radius:12px;padding:12px 4px;font:inherit;cursor:pointer;min-height:64px}
+.wheel button.on{border-color:var(--tx)}.wheel small{display:block;font-size:.7rem;color:var(--mu)}
+textarea{width:100%;min-height:80px;border:1px solid var(--bd);background:var(--bg);color:var(--tx);border-radius:8px;padding:8px;font:inherit}
+nav{position:fixed;bottom:0;left:0;right:0;display:flex;background:var(--cd);border-top:1px solid var(--bd);padding-bottom:env(safe-area-inset-bottom)}
+nav button{flex:1;min-width:0;border:0;background:none;color:var(--mu);padding:12px 4px;font:inherit;font-size:.85rem;cursor:pointer}
+nav button.on{color:var(--tx);font-weight:bold;border-top:3px solid var(--tx)}
+section{display:none}section.on{display:block}a{color:var(--sib)}
+.chl button{display:block;width:100%;text-align:left;border:1px solid var(--bd);background:var(--cd);color:var(--tx);border-radius:10px;padding:12px;margin:6px 0;font:inherit;cursor:pointer}.rd p{margin:.8em 0;text-indent:1.2em}.rd{font-size:var(--fs,17px)}.bar{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}.bar button{border:1px solid var(--bd);background:var(--cd);color:var(--tx);border-radius:8px;padding:8px 12px;font:inherit;cursor:pointer}.bar button.on{background:var(--tx);color:var(--bg)}audio{width:100%;margin:6px 0}@media print{header,nav,.bar,.noprint{display:none}}</style></head><body>
+<header><h1>Testing Lang Gud → Pamana → SIBOL</h1>
+<span class="lg" id="lg"><button data-l="fil">Tagalog</button><button data-l="en">English</button><button data-l="bis">Bisaya</button></span>
+<button class="th" id="th" aria-label="Dark mode">🌓</button></header>
+<main>
+<section id="daloy"></section><section id="siklo"></section><section id="bow"></section><section id="kuwento"></section><section id="kanta"></section><section id="port"></section>
+</main>
+<nav id="nav"></nav>
+<script src="data.js"></script>
+<script>
+const L={fil:{d:"Daloy",s:"Siklo",b:"BOW",k:"Kuwento",ob:"Pagtutol at tugon",th:"Mga kausap na pilosopo",pl:"Sa simpleng salita",sc:"Sa kuwento",ask:"Pindutin ang Hugna na pinakamalapit sa buhay mo ngayon, at isulat ang sagot.",save:"Nai-save sa telepono mo.",intro:"Ang bawat sagot ay lumilikha ng susunod na tanong.",wk:"Linggo",hint:"Interpretatibong pagbasa para sa talakayan sa klase.",rd:"Basahin ang kuwento",nx:"Susunod na bersyon: kumpletong teksto ng Aklat 1 at Aklat 2, offline."},
+en:{d:"Flow",s:"Cycle",b:"BOW",k:"Story",ob:"Objection and reply",th:"Philosophers in conversation",pl:"In plain words",sc:"In the story",ask:"Tap the phase closest to your life right now, then write your answer.",save:"Saved on your phone.",intro:"Each answer creates the next question.",wk:"Week",hint:"Interpretive reading for class discussion.",rd:"Read the story",nx:"Next version: full offline text of Book 1 and Book 2."},
+bis:{d:"Daloy",s:"Siklo",b:"BOW",k:"Sugilanon",ob:"Pagtutol ug tubag",th:"Mga pilosopo nga kauban",pl:"Sa yano nga pulong",sc:"Sa sugilanon",ask:"Pindota ang Hugna nga pinakaduol sa imong kinabuhi karon, unya isulat ang imong tubag.",save:"Na-save sa imong telepono.",intro:"Ang matag tubag maghimo sa sunod nga pangutana.",wk:"Semana",hint:"Interpretatibong pagbasa para sa panaghisgot sa klase.",rd:"Basaha ang sugilanon",nx:"Sunod nga bersyon: kompleto nga teksto sa Aklat 1 ug Aklat 2, offline."}};
+const P=[
+{c:"tlg",n:"Testing Lang Gud",v:"Tapang · Courage · Kaisug",ph:"Sartre, Marcel, Socrates, Dewey",
+q:{fil:"Makakilos ba ako kahit hindi ko alam kung tutubo?",en:"Can I act even when I do not know if it will grow?",bis:"Makabuhat ba ko bisan wala ko kabalo kung motubo?"},
+p:{fil:"Hindi kabiguan ang hindi pag-alam. Iyon ang simula. Magtanim ka, at tingnan kung tutubo.",en:"Not knowing is not failure. It is the beginning. Plant, then see if it grows.",bis:"Dili kapakyasan ang wala kabalo. Mao kana ang sugod. Magtanom ka, unya tan-awa kung motubo."},
+o:{fil:"Hindi ba ito padalus-dalos? Tugon: may karanasan at pagtimbang ito, at may panahon ng pag-angkop at pagtindig (SIBOL).",en:"Is this reckless? Reply: it rests on experience and weighing, with a time to bend and a time to stand (SIBOL).",bis:"Dili ba ni pagdali-dali? Tubag: naay kasinatian ug pagtimbang, ug naay panahon sa pag-angkop ug pagtindog (SIBOL)."}},
+{c:"pam",n:"Pamanang Wala Nato Maabti",v:"Pagkabukas-palad · Generosity · Pagkamahinatagon",ph:"Jonas, Rawls, Leopold, Confucius",
+q:{fil:"Bakit magtatanim kung hindi ako ang mag-aani?",en:"Why plant if I will not be the one to harvest?",bis:"Ngano nga magtanom kung dili ko ang maanihon?"},
+p:{fil:"Hindi lang tayo tagapagmana. Tayo rin ang pansamantalang tagapag-alaga ng kakailanganin ng susunod.",en:"We are not only heirs. We are also temporary caretakers of what the next generation will need.",bis:"Dili lang kita manununod. Kita usab ang temporaryo nga tigbantay sa kinahanglanon sa sunod."},
+o:{fil:"Paano magtatanim para sa bukas ang kapos ngayon? Tugon: sapat ang maliit na gawa, at usapin din ng katarungan ang lupa.",en:"How can the poor plant for tomorrow? Reply: a small act is enough, and the soil is also a question of justice.",bis:"Unsaon pagtanom para ugma sa kapos karon? Tubag: igo na ang gamay nga buhat, ug isyu usab sa hustisya ang yuta."}},
+{c:"sib",n:"SIBOL",v:"Karunungan · Wisdom · Kaalam",ph:"Heraclitus, Aristotle, Heidegger, Enriquez, Freire",
+q:{fil:"Ano ang sumisibol dito ngayon, saan ito nagmula, at saan ito patungo?",en:"What is sprouting here now, where did it come from, and where is it going?",bis:"Unsa ang misibol dinhi karon, asa kini gikan, ug asa kini paingon?"},
+p:{fil:"Ang buhay ay lumalago, hindi binubuo. Walong Hugna na hinabing siklo na bumabalik sa Binhi.",en:"Life grows; it is not assembled. Eight phases woven into a cycle that returns to the Seed.",bis:"Ang kinabuhi motubo, dili gitukod. Walo ka Hugna nga hinabol nga siklo nga mobalik sa Binhi."},
+o:{fil:"Hindi ba pinapalambot ng siklo ang kawalang-katarungan? Tugon: hindi. Itinatanong ng Lupa kung nasaan ang bato at sino ang naglagay.",en:"Does the cycle soften injustice? Reply: no. The Soil asks where the rock is and who put it there.",bis:"Dili ba pagapahumokon sa siklo ang dili-hustisya? Tubag: dili. Nagapangutana ang Lupa kung asa ang bato ug kinsa ang nagbutang."}}];
+const H=[
+["Binhi","tlg0","Potensyal na hindi pa alam kung tutubo|Potential not yet known to grow|Potensyal nga wala pa mahibaloi kung motubo","Ang mangga na walang kilalang nagtanim"],
+["Ramut","","Ang di-nakikitang ugat: pamilya, halaga, kasaysayan|The unseen root: family, values, history|Ang dili makita nga gamot: pamilya, bili, kasaysayan","Ang mais ni Lolo Piro; ang aral ni Maria"],
+["Sibol","tlg","Unang nakikitang hakbang: Testing Lang Gud|The first visible step: Testing Lang Gud|Unang makita nga lakang: Testing Lang Gud","Ang butil ng mais sa madaling-araw"],
+["Sanga","","Paglawak, nakakabit pa rin sa ugat|Expansion, still attached to the root|Paglapad, nakabit gihapon sa gamot","Ang lumaking gulayan"],
+["Ugnay","","Magkakahiwalay na paglago, kumikilos bilang isa|Separate growths acting as one|Managlahi nga pagtubo, nagakuyog isip usa","Ang bayanihan ng timba"],
+["Bukas","","Pagharap sa bukas na hindi makokontrol|Facing a tomorrow you cannot control|Pag-atubang sa ugma nga dili makontrol","Ang pagtatanim ng narra"],
+["Bunga","pam","Pamanang Wala Nato Maabti: ipinapasa ang bunga|Legacy: the fruit is passed on|Panulondon: gipasa ang bunga","Ang lilim ng narra"],
+["Lupasay","","Pagbalik sa lupa; ang wakas ay nagiging Binhi|Return to the soil; the end becomes a Seed|Pagbalik sa yuta; ang katapusan mahimong Binhi","Ang buto ng mangga na itinanim ng bata"]];
+const W=[["1","Socrates · Heraclitus · Aristotle · Heidegger","Defining Philosophy, aporia, change, potential","tlg"],["2","Laozi · Buddha · Confucius · Enriquez · Timbreza","Eastern thought; Kapwa, Loob, Hiya, Pakikisama","sib"],["3","JEB · Abstract Ladder","Truth, analysis, abstraction: Testing → Pamana → SIBOL","tlg"],["4","Socrates · Marcel","Philosophical reflection; My Philosophical Lens","sib"],["5","Sartre · Marcel · Merleau-Ponty · Leopold","Freedom, embodiment, ecological ethics","tlg"],["6","Aristotle · Buber · Rawls · Jonas","Relationships, eudaimonia, justice across generations","pam"],["7","Dewey · Freire · Illich · Rizal","Education and social transformation","sib"],["8","Lahat","My Philosophical Portrait","pam"]];
+let lang=localStorage.getItem("lg")||"fil",tab="daloy";
+const $=s=>document.querySelector(s),tx=s=>s.split("|")[{fil:0,en:1,bis:2}[lang]];
+const sv=(k,v)=>{try{v===undefined?0:localStorage.setItem(k,v)}catch(e){}return(()=>{try{return localStorage.getItem(k)||""}catch(e){return""}})()};
+function render(){const t=L[lang];
+$("#nav").innerHTML=[["daloy",t.d],["siklo",t.s],["kuwento",t.k],["kanta","♪"],["bow",t.b],["port","✎"]].map(([i,n])=>`<button data-t="${i}" class="${tab==i?"on":""}">${n}</button>`).join("");
+document.querySelectorAll("#lg button").forEach(b=>b.classList.toggle("on",b.dataset.l==lang));
+document.querySelectorAll("section").forEach(s=>s.classList.toggle("on",s.id==tab));
+$("#daloy").innerHTML=`<p class="mu">${t.intro}</p>`+P.map((p,i)=>`<div class="card" style="--c:var(--${p.c=="tlg"?"tlg":p.c=="pam"?"pam":"sib"})"><span class="tag t-${p.c}">${i+1}</span><h3>${p.n}</h3><div class="mu">${p.v}</div><div class="q">${p.q[lang]}</div><p><b>${t.pl}:</b> ${p.p[lang]}</p><p class="mu"><b>${t.th}:</b> ${p.ph}</p><details><summary>${t.ob}</summary><p>${p.o[lang]}</p></details></div>${i<2?'<div class="arrow">▼</div>':""}`).join("")+`<p class="mu">${t.hint}</p>`;
+$("#siklo").innerHTML=`<p class="mu">${t.ask}</p><div class="wheel">${H.map((h,i)=>`<button data-h="${i}" style="border-color:${h[1].startsWith("tlg")?"var(--tlg)":h[1]=="pam"?"var(--pam)":""}">${h[0]}<small>${i+1}</small></button>`).join("")}</div><div id="hd"></div>`;
+$("#bow").innerHTML=W.map(w=>`<div class="card" style="--c:var(--${w[3]})"><h3>${t.wk} ${w[0]}</h3><div>${w[2]}</div><div class="mu">${w[1]}</div></div>`).join("")+`<p class="mu">${t.hint}</p>`;
+rk();rs();rp()}
+function showH(i){const h=H[i],t=L[lang],k="h"+i;document.querySelectorAll(".wheel button").forEach((b,j)=>b.classList.toggle("on",j==i));
+$("#hd").innerHTML=`<div class="card"><h3>${h[0]} ${h[1].startsWith("tlg")?'<span class="tag t-tlg">Testing</span>':""}${h[1]=="pam"?'<span class="tag t-pam">Pamana</span>':""}</h3><p>${tx(h[2])}</p><p class="mu"><b>${t.sc}:</b> ${h[3]}</p><div class="q">${P[2].q[lang]}</div><textarea id="ta"></textarea><div class="mu" id="sm"></div></div>`;
+$("#ta").value=sv(k);$("#ta").oninput=e=>{sv(k,e.target.value);$("#sm").textContent=t.save}}
+document.addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;
+if(b.dataset.t){tab=b.dataset.t;render();scrollTo(0,0)}else if(b.dataset.l){lang=b.dataset.l;sv("lg",lang);render()}else if(b.dataset.h!==undefined)showH(+b.dataset.h);else if(b.id=="th"){const r=document.documentElement;r.dataset.t=r.dataset.t=="d"?"l":"d"}});
+
+const LX={fil:{b1:"Aklat 1",b2:"Aklat 2",bk:"Balik",pv:"Nauna",nx:"Susunod",cc:"Concept Card",qq:"Tanong",cp:"Konsepto",ph:"Pilosopo",hg:"Hugna",bw:"BOW",tr:"Subukan: isulat ang iyong sagot",ip:"Pagbasang interpretatibo",dl:"I-save ang mga kanta offline",dn:"Handa na offline",pt:"Ang iyong mga sagot",pr:"I-print o i-save bilang PDF",em:"Wala pang naisusulat. Sagutin ang mga card sa Kuwento at Siklo."},
+en:{b1:"Book 1",b2:"Book 2",bk:"Back",pv:"Previous",nx:"Next",cc:"Concept Card",qq:"Question",cp:"Concept",ph:"Philosopher",hg:"Phase",bw:"BOW",tr:"Try it: write your answer",ip:"Interpretive reading",dl:"Save songs offline",dn:"Ready offline",pt:"Your answers",pr:"Print or save as PDF",em:"Nothing written yet. Answer the cards in Story and Cycle."},
+bis:{b1:"Aklat 1",b2:"Aklat 2",bk:"Balik",pv:"Nauna",nx:"Sunod",cc:"Concept Card",qq:"Pangutana",cp:"Konsepto",ph:"Pilosopo",hg:"Hugna",bw:"BOW",tr:"Sulayi: isulat ang imong tubag",ip:"Interpretatibong pagbasa",dl:"I-save ang mga kanta offline",dn:"Andam na offline",pt:"Ang imong mga tubag",pr:"I-print o i-save isip PDF",em:"Wala pay nasulat. Tubaga ang mga card sa Sugilanon ug Siklo."}};
+let bk="b1",ci=-1,fs=+(sv("fs")||17);
+function esc(s){return s.replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]))}
+function cardHTML(key){const c=DATA.cards[key],x=LX[lang];if(!c)return"";
+return `<div class="card" style="--c:var(--${c[2]=="tlg"?"tlg":c[2]=="pam"?"pam":"sib"})"><span class="tag t-${c[2]}">${c[2]=="tlg"?"Testing":c[2]=="pam"?"Pamana":"SIBOL"}</span><span class="mu">${x.ip}</span><h3>${x.cc}</h3><div class="q">${tx(c[5])}</div><p><b>${x.cp}:</b> ${c[0]}<br><b>${x.ph}:</b> ${c[1]}<br><b>${x.hg}:</b> ${c[3]} · <b>${x.bw}:</b> ${c[4]}</p><b>${x.tr}</b><textarea data-k="c-${key}">${esc(sv("c-"+key))}</textarea></div>`}
+function rk(){const x=LX[lang],el=$("#kuwento");
+if(ci<0){el.innerHTML=`<div class="bar">${["b1","b2"].map(b=>`<button data-bk="${b}" class="${bk==b?"on":""}">${x[b]}</button>`).join("")}</div><p class="mu">${bk=="b1"?"Ang Binhing Hindi Alam Kung Tutubo":"Ang Punong Hindi Natin Aanihin"}</p><div class="chl">${DATA[bk].map((c,i)=>`<button data-ch="${i}"><b>${c.n.replace("KABANATA","Kabanata")}</b> · ${c.t}${DATA.cards[bk+"-"+i]?`<br><span class="mu">${DATA.cards[bk+"-"+i][0]}</span>`:""}</button>`).join("")}</div>`;return}
+const c=DATA[bk][ci],key=bk+"-"+ci;
+el.innerHTML=`<div class="bar"><button data-ch="-1">← ${x.bk}</button><button data-fs="-1">A−</button><button data-fs="1">A+</button></div><h2>${c.n.replace("KABANATA","Kabanata")}<br>${c.t}</h2><div class="rd" style="--fs:${fs}px">${c.p.map(p=>`<p>${esc(p)}</p>`).join("")}</div>${cardHTML(key)}<div class="bar"><button data-ch="${ci-1}" ${ci?"":"disabled"}>← ${x.pv}</button><button data-ch="${ci+1}" ${ci<DATA[bk].length-1?"":"disabled"}>${x.nx} →</button></div>`}
+function rs(){const x=LX[lang];$("#kanta").innerHTML=DATA.songs.map(s=>`<div class="card"><h3>♪ ${s.t}</h3><audio controls preload="none" src="${s.f}"></audio></div>`).join("")+`<div class="bar"><button data-dl="1">${x.dl}</button></div><div class="mu" id="dls"></div>`}
+function rp(){const x=LX[lang];let o=[];H.forEach((h,i)=>{const v=sv("h"+i);if(v)o.push(`<div class="card"><h3>${h[0]}</h3><p>${esc(v)}</p></div>`)});
+Object.keys(DATA.cards).forEach(k=>{const v=sv("c-"+k);if(v){const [b,i]=k.split("-");o.push(`<div class="card"><h3>${DATA[b][+i].t}</h3><div class="mu">${DATA.cards[k][0]}</div><p>${esc(v)}</p></div>`)}});
+$("#port").innerHTML=`<h2>${x.pt}</h2>`+(o.join("")||`<p class="mu">${x.em}</p>`)+`<div class="bar noprint"><button data-pr="1">${x.pr}</button></div>`}
+document.addEventListener("click",async e=>{const b=e.target.closest("button");if(!b)return;const d=b.dataset;
+if(d.bk){bk=d.bk;ci=-1;rk()}else if(d.ch!==undefined){ci=+d.ch;rk();scrollTo(0,0)}else if(d.fs){fs=Math.min(26,Math.max(14,fs+ +d.fs*2));sv("fs",fs);rk()}
+else if(d.pr)print();else if(d.dl){const m=$("#dls");try{const c=await caches.open("tlg-audio");for(const s of DATA.songs){m.textContent=s.t+"...";await c.add(s.f)}m.textContent=LX[lang].dn}catch(err){m.textContent="Hindi ma-save (kailangan ng internet at HTTPS)."}}
+if(tab=="kuwento"&&(d.t||d.l))rk()},true);
+document.addEventListener("input",e=>{if(e.target.dataset.k)sv(e.target.dataset.k,e.target.value);rp()});
+render();if("serviceWorker"in navigator)navigator.serviceWorker.register("sw.js").catch(()=>{});
+</script></body></html>
